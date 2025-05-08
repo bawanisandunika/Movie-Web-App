@@ -1,0 +1,156 @@
+@import "../../mixins.scss";
+
+.movieCard {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 1.5rem;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1e293b;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+
+  @media (min-width: 640px) {
+    width: calc(50% - 1rem);
+  }
+
+  @media (min-width: 1024px) {
+    width: calc(25% - 1.5rem);
+  }
+
+  @media (min-width: 1280px) {
+    width: calc(20% - 1.5rem);
+  }
+
+  .posterBlock {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 12px;
+    transition: all 0.3s ease;
+
+    .lazy-load-image-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    .circleRating {
+      width: 48px;
+      height: 48px;
+      position: relative;
+      top: 20px;
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+      @media (min-width: 768px) {
+        width: 56px;
+        height: 56px;
+      }
+    }
+
+    .genres {
+      display: none;
+      position: relative;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+
+      @media (min-width: 768px) {
+        display: flex;
+      }
+    }
+  }
+
+  .textBlock {
+    padding: 16px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #60a5fa;
+      @include ellipsis(2);
+      transition: color 0.3s ease;
+
+      @media (min-width: 768px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .date {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 400;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+
+    .posterBlock {
+      opacity: 0.8;
+    }
+
+    .textBlock .title {
+      color: #a78bfa;
+    }
+  }
+
+  // Mobile responsiveness
+  @media (max-width: 640px) {
+    max-width: 280px;
+
+    .posterBlock {
+      padding: 8px;
+
+      .circleRating {
+        width: 40px;
+        height: 40px;
+        top: 16px;
+      }
+    }
+
+    .textBlock {
+      padding: 12px;
+
+      .title {
+        font-size: 1.125rem;
+      }
+
+      .date {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
