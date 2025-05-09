@@ -43,7 +43,7 @@
 
   .logoutBtn {
     position: absolute;
-    top: 80px; // Adjusted to be near the header
+    top: 80px;
     right: 16px;
     padding: 10px 20px;
     background: linear-gradient(90deg, #ef4444, #f87171);
@@ -67,7 +67,7 @@
     @media (min-width: 768px) {
       padding: 12px 24px;
       font-size: 1rem;
-      top: 80px; // Consistent positioning
+      top: 80px;
       right: 24px;
     }
   }
@@ -150,7 +150,7 @@
     }
   }
 
-  // Mobile responsiveness
+  // Tablet responsiveness
   @media (max-width: 768px) {
     min-height: 80vh;
 
@@ -168,17 +168,18 @@
 
       .searchInput {
         max-width: 100%;
+        border-radius: 40px;
 
         input {
-          height: 48px;
-          font-size: 0.875rem;
-          padding: 0 16px;
+          height: 60px;
+          font-size: 1rem;
+          padding: 0 24px;
         }
 
         button {
           width: 100px;
-          height: 48px;
-          font-size: 0.875rem;
+          height: 60px;
+          font-size: 1rem;
         }
       }
     }
@@ -191,23 +192,51 @@
     }
   }
 
+  // Mobile responsiveness
   @media (max-width: 480px) {
     .heroBannerContent {
+      padding: 12px;
+      gap: 1rem;
+
       .searchInput {
         flex-direction: column;
         background: none;
         box-shadow: none;
+        gap: 12px;
 
         input {
           width: 100%;
-          border-radius: 25px;
-          background: rgba(255, 255, 255, 0.1);
-          margin-bottom: 12px;
+          height: 64px; // Increased height for better touch target
+          border-radius: 32px;
+          background: rgba(255, 255, 255, 0.15);
+          padding: 0 20px;
+          font-size: 1.125rem; // Larger font for readability
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          transition: all 0.3s ease;
+
+          &:focus {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+          }
+
+          &::placeholder {
+            font-size: 1rem;
+          }
         }
 
         button {
           width: 100%;
-          border-radius: 25px;
+          height: 56px; // Slightly shorter than input for balance
+          border-radius: 28px;
+          font-size: 1rem;
+          background: linear-gradient(90deg, #3b82f6, #60a5fa);
+          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+
+          &:hover,
+          &:active {
+            background: linear-gradient(90deg, #60a5fa, #3b82f6);
+            transform: scale(1.02);
+          }
         }
       }
     }

@@ -1,27 +1,28 @@
 @import "../../mixins.scss";
 
 .switchingTabs {
-  height: 48px;
+  display: flex;
+  justify-content: center;
+  padding: 8px;
   background: rgba(15, 23, 42, 0.95);
   border-radius: 12px;
-  padding: 4px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 400px;
+  margin: 0 auto;
 
   .tabItems {
     display: flex;
     align-items: center;
-    height: 40px;
     position: relative;
     width: 100%;
-    max-width: 300px; // Limits width for larger screens
+    height: 40px;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #1e293b, #334155);
+    padding: 0;
 
     .tabItem {
       flex: 1;
-      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -29,79 +30,86 @@
       font-family: 'Inter', sans-serif;
       font-size: 1rem;
       font-weight: 500;
-      position: relative;
-      z-index: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       cursor: pointer;
       transition: color 0.3s ease;
+      z-index: 2;
+      padding: 0 16px;
 
       &.active {
         color: #ffffff;
         font-weight: 600;
       }
+
+      &:hover {
+        color: #60a5fa;
+      }
     }
 
-    .movingBg {
-      height: 100%;
-      width: 50%; // Takes half the container width (for two tabs)
-      border-radius: 8px;
-      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    .activeIndicator {
       position: absolute;
-      top: 0;
-      left: 0;
-      box-shadow: 0 2px 10px rgba(59, 130, 246, 0.5);
-      transition: left 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); // Smooth elastic animation
+      bottom: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      border-radius: 2px;
+      transition: left 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 1;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
     }
   }
 
-  // Responsive design
+  // Dynamic width for activeIndicator based on tab count
+  .tabItems {
+    &[data-tab-count="3"] .activeIndicator {
+      width: 33.33%;
+    }
+    &[data-tab-count="4"] .activeIndicator {
+      width: 25%;
+    }
+    &[data-tab-count="5"] .activeIndicator {
+      width: 20%;
+    }
+  }
+
+  // Tablet view (below 768px)
   @media (max-width: 768px) {
-    height: 40px;
+    max-width: 100%;
+    padding: 6px;
     border-radius: 10px;
-    padding: 3px;
 
     .tabItems {
-      height: 34px;
-      max-width: 240px;
+      height: 36px;
 
       .tabItem {
         font-size: 0.875rem;
+        padding: 0 12px;
       }
 
-      .movingBg {
-        border-radius: 6px;
+      .activeIndicator {
+        height: 2.5px;
       }
     }
   }
 
+  // Mobile view (below 480px)
   @media (max-width: 480px) {
-    height: 36px;
+    padding: 4px;
     border-radius: 8px;
-    padding: 2px;
 
     .tabItems {
       height: 32px;
-      max-width: 200px;
+      gap: 4px;
 
       .tabItem {
         font-size: 0.75rem;
+        padding: 0 8px;
       }
 
-      .movingBg {
-        border-radius: 6px;
+      .activeIndicator {
+        height: 2px;
+        border-radius: 1px;
       }
-    }
-  }
-
-  // Adjust movingBg width dynamically for different number of tabs
-  .tabItems {
-    &[data-tab-count="3"] .movingBg {
-      width: 33.33%;
-    }
-    &[data-tab-count="4"] .movingBg {
-      width: 25%;
-    }
-    &[data-tab-count="5"] .movingBg {
-      width: 20%;
     }
   }
 }
