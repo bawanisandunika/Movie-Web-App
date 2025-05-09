@@ -16,7 +16,7 @@ const Footer = () => {
               <span className="logo-dot">.</span>
             </Link>
             <p className="footer-slogan">
-              Your ultimate destination for movies and TV shows
+              Find Your Perfect Movie or Show Today
             </p>
           </div>
 
