@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../context/AuthContext';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import "./Welcome.scss";
 
 const Welcome = () => {
@@ -9,8 +10,23 @@ const Welcome = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    return savedMode ? JSON.parse(savedMode) : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
   const { signUp, signIn, user } = UserAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+      document.body.classList.remove('light-mode');
+    } else {
+      document.body.classList.add('light-mode');
+      document.body.classList.remove('dark-mode');
+    }
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +55,19 @@ const Welcome = () => {
   }
 
   return (
-    <div className="welcomeContainer">
+    <div className={`welcomeContainer ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+      <button 
+        className="theme-toggle"
+        onClick={() => setDarkMode(!darkMode)}
+        aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        {darkMode ? (
+          <FaSun className="theme-icon" color="#FFD700" />
+        ) : (
+          <FaMoon className="theme-icon" color="#333" />
+        )}
+      </button>
+
       <div className="welcomeContent">
         <h1>Welcome to Theatre.com</h1>
         <p>Please {activeTab === 'signin' ? 'sign in' : 'sign up'} to continue</p>

@@ -1,104 +1,291 @@
+// Variables
+:root {
+  --primary-color: #e50914;
+  --primary-hover: #f40612;
+  --text-primary: #ffffff;
+  --text-secondary: #333333;
+  --bg-primary: rgba(0, 0, 0, 0.75);
+  --bg-secondary: rgba(255, 255, 255, 0.85);
+  --input-bg-dark: #333;
+  --input-bg-light: #f5f5f5;
+  --border-light: #ddd;
+}
+
+// Theme Toggle
+// Theme Toggle - Enhanced Visibility
+.theme-toggle {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  background: var(--toggle-bg);
+  border: 2px solid var(--toggle-border);
+  cursor: pointer;
+  z-index: 1000;
+  padding: 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--toggle-shadow);
+  
+  &:hover {
+    transform: scale(1.1);
+    background: var(--toggle-hover);
+    box-shadow: 0 6px 20px var(--toggle-shadow-hover);
+    
+    .theme-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+  }
+
+  .theme-icon {
+    font-size: 0.5rem;
+    color: var(--toggle-icon);
+  }
+
+  .theme-tooltip {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateX(10px) translateY(-50%);
+    background: var(--toggle-tooltip-bg);
+    color: var(--toggle-tooltip-text);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    margin-right: 10px;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent transparent var(--toggle-tooltip-bg);
+    }
+  }
+}
+
+// Dark Mode Colors
+.dark-mode {
+  --toggle-bg: #FFD700; // Gold background for dark mode
+  --toggle-border: #FFFFFF;
+  --toggle-icon: #333333;
+  --toggle-shadow: rgba(255, 215, 0, 0.3);
+  --toggle-shadow-hover: rgba(255, 215, 0, 0.5);
+  --toggle-hover: #FFC000;
+  --toggle-tooltip-bg: #FFFFFF;
+  --toggle-tooltip-text: #333333;
+}
+
+// Light Mode Colors
+.light-mode {
+  --toggle-bg: #5D3FD3; // Purple background for light mode
+  --toggle-border: #FFFFFF;
+  --toggle-icon: #FFFFFF;
+  --toggle-shadow: rgba(93, 63, 211, 0.3);
+  --toggle-shadow-hover: rgba(93, 63, 211, 0.5);
+  --toggle-hover: #4B2FAD;
+  --toggle-tooltip-bg: #333333;
+  --toggle-tooltip-text: #FFFFFF;
+}
+// Container
 .welcomeContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png') no-repeat center center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  transition: all 0.3s ease;
+
+  // Dark Mode
+  &.dark-mode {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png') no-repeat center center;
     background-size: cover;
-    color: white;
-    padding: 20px;
-  
+    color: var(--text-primary);
+
     .welcomeContent {
-      background: rgba(0, 0, 0, 0.75);
-      padding: 40px;
-      border-radius: 8px;
-      max-width: 450px;
-      width: 100%;
-  
-      h1 {
-        font-size: 32px;
-        margin-bottom: 10px;
-      }
-  
-      p {
-        margin-bottom: 20px;
-      }
-  
-      .authTabs {
-        display: flex;
-        margin-bottom: 20px;
-  
-        button {
-          flex: 1;
-          padding: 10px;
-          background: transparent;
-          border: none;
-          color: white;
-          font-size: 16px;
-          cursor: pointer;
-          border-bottom: 2px solid transparent;
-          transition: all 0.3s;
-  
-          &.active {
-            border-bottom: 2px solid #e50914;
-            font-weight: bold;
-          }
-  
-          &:hover {
-            background: rgba(255, 255, 255, 0.1);
-          }
+      background: var(--bg-primary);
+      
+      input {
+        background: var(--input-bg-dark);
+        color: var(--text-primary);
+        
+        &:focus {
+          background: #454545;
         }
       }
-  
-      .errorMessage {
-        color: #e50914;
-        margin-bottom: 15px;
-        padding: 10px;
-        background: rgba(229, 9, 20, 0.1);
-        border-radius: 4px;
-      }
-  
-      .formGroup {
-        margin-bottom: 15px;
-  
-        label {
-          display: block;
-          margin-bottom: 5px;
-          font-size: 14px;
+
+      .authTabs button {
+        color: var(--text-primary);
+        
+        &.active {
+          border-bottom: 2px solid var(--primary-color);
         }
-  
-        input {
-          width: 100%;
-          padding: 10px;
-          background: #333;
-          border: none;
-          border-radius: 4px;
-          color: white;
-          font-size: 16px;
-  
-          &:focus {
-            outline: none;
-            background: #454545;
-          }
-        }
-      }
-  
-      .authButton {
-        width: 100%;
-        padding: 12px;
-        background: #e50914;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: background 0.3s;
-  
+        
         &:hover {
-          background: #f40612;
+          background: rgba(255, 255, 255, 0.1);
         }
       }
     }
   }
+
+  // Light Mode
+  &.light-mode {
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+                url('https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png') no-repeat center center;
+    background-size: cover;
+    color: var(--text-secondary);
+
+    .welcomeContent {
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      
+      input {
+        background: var(--input-bg-light);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-light);
+        
+        &:focus {
+          background: white;
+        }
+      }
+
+      .authTabs button {
+        color: var(--text-secondary);
+        
+        &.active {
+          border-bottom: 2px solid var(--primary-color);
+        }
+        
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Content
+.welcomeContent {
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 450px;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+
+// Tabs
+.authTabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  button {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    font-weight: 500;
+
+    &.active {
+      font-weight: bold;
+    }
+  }
+}
+
+// Form Elements
+.formGroup {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: all 0.3s;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+    }
+  }
+}
+
+.errorMessage {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  padding: 12px;
+  background: rgba(229, 9, 20, 0.1);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.authButton {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+
+  &:hover {
+    background: var(--primary-hover);
+  }
+}
+
+// Global body styles
+body {
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease;
+
+  &.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
+  &.light-mode {
+    background-color: #f5f5f5;
+    color: #333333;
+  }
+}
