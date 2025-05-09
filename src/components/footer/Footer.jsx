@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="footer-logo">
             <Link to="/" className="logo">
-              <span className="logo-text">Theatre</span>
+              <span className="logo-text">TheatreX</span>
               <span className="logo-dot">.</span>
             </Link>
             <p className="footer-slogan">
@@ -34,25 +34,25 @@ const Footer = () => {
             <div className="footer-column">
               <h3 className="footer-title">Legal</h3>
               <ul>
-                <li><Link to="/">Terms of Use</Link></li>
-                <li><Link to="/">Privacy Policy</Link></li>
-                <li><Link to="/">Cookie Policy</Link></li>
+                <li><Link to="/terms">Terms of Use</Link></li>
+                <li><Link to="/privacy">Privacy Policy</Link></li>
+                <li><Link to="/cookies">Cookie Policy</Link></li>
               </ul>
             </div>
 
             <div className="footer-column">
               <h3 className="footer-title">Connect</h3>
               <div className="social-links">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                   <i className="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                   <i className="fab fa-twitter"></i>
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <i className="fab fa-instagram"></i>
                 </a>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                   <i className="fab fa-youtube"></i>
                 </a>
               </div>
@@ -62,7 +62,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p className="copyright">
-            &copy; {new Date().getFullYear()} Theatre.com. All rights reserved.
+            © {new Date().getFullYear()} TheatreX. All rights reserved.
           </p>
           <div className="footer-credits">
             <span>Powered by TMDB API</span>
